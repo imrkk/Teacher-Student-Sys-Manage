@@ -71,7 +71,7 @@ public class StudentService {
 		return "Student Registered Successfully!! ";
 	}
 	
-	@Cacheable(value="studentData",key="#email")
+	//@Cacheable(value="studentData",key="#email")
 	public StudentViewDetails getStudentData(String email) {
 		if(ObjectUtils.isEmpty(email)) {
 			throw new ManageException("Please Enter Email");
@@ -125,7 +125,7 @@ public class StudentService {
 	}
 	
 	
-    @Cacheable(value="studentsTaskAndMarksData",key="#email")
+        //@Cacheable(value="studentData",key="#email")
 	public TaskStatusMarksResponse getMarksAndTaskStatus(String email) {
 		if(ObjectUtils.isEmpty(email)) {
 			throw new ManageException("Please Provide Email");
