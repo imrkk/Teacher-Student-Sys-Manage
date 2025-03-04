@@ -112,7 +112,7 @@ public class TeacherService {
 		return responses;
 	}
 
-	@CachePut(value="taskData",key="#request.taskName")
+	@CachePut(value = "taskData", key = "#request.taskName")
 	public TaskCreationResponse createTask(TaskCreationRequest request) {
 	    Task task = new Task();
 
@@ -164,7 +164,7 @@ public class TeacherService {
 	}
 	
 	//
-	@CacheEvict(value="data",key="#taskName")
+	@CacheEvict(value = "taskData", key = "#taskName")
 	public String deleteTask(String taskName) {
 		Boolean isExists = taskRep.existsByTaskName(taskName);
 		if(!isExists) {
@@ -177,6 +177,7 @@ public class TeacherService {
 	}
 		
 	//
+	@CachePut(value = "taskData", key = "#request.taskName")
 	public Task updateTaskStatusAndMarks(TaskUpdateRequest request) {
 		Boolean isExists = taskRep.existsByTaskName(request.getTaskName());
 		if(!isExists) {
@@ -193,7 +194,7 @@ public class TeacherService {
 	}
 	
 	
-	@Cacheable(value="tasks")
+
 	public List<TaskDataResponse> getAllTaskData(){
 		List<Task> list = taskRep.findAllTaskData();
 		if(ObjectUtils.isEmpty(list)) {
