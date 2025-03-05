@@ -144,6 +144,11 @@ public class TeacherService {
 	            throw new ManageException("Student email not found: ");
 	        }
 
+		Boolean studentsExists = taskRep.existsByTaskGivenTo(studentId.longValue());
+		if (studentsExists) {
+			throw new ManageException("Task Is already assign to this student please delete previous!!");
+		}
+
 	    task.setTaskGivenTo(studentId);
 
 	    if (ObjectUtils.isEmpty(request.getTaskDeadLine())) {
