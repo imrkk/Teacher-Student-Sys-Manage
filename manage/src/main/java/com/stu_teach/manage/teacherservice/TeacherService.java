@@ -41,6 +41,9 @@ public class TeacherService {
 	
 	@Autowired
 	private taskRepo taskRep;
+
+	@Autowired
+	private DepartmentRepo departmentRepo;
 	
 	public String registerTeacher(TeacherRegisterRequest request) {
 		Boolean emailExist = teacherRepo.existsByEmail(request.getEmail());
@@ -70,6 +73,21 @@ public class TeacherService {
 		teacher.setHashPassword(bcryptEncoder.encode(request.getHashPassword()));
 		teacherRepo.save(teacher);
 		return "Teacher Registered Successfully!! ";
+	}
+
+
+	public Department createDepartment(DepartmentRequest request) {
+		if (ObjectUtils.isEmpty(request.getDepartmentName())) {
+			throw new ManageException("Department name cannot be null");
+		} 
+		Boolean isDepExists = departmentRepo.existsByDepartmentName(request.getDepartmentName());
+		if(isDepExists) {
+			throw new ManageException("Department Name Already Exists!!");
+		}
+		Department department = new Department();
+		department.setDepartmentName(request.getDepartmentName());
+		departmentRepo.save(department);
+		return department;
 	}
 	
 	
