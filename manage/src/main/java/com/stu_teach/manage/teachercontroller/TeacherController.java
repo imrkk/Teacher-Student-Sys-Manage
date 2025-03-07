@@ -113,6 +113,11 @@ public class TeacherController {
 	public ResponseEntity<List<TaskDataResponse>> allTaskData() {
 		return new ResponseEntity<>(teacherService.getAllTaskData(), HttpStatus.OK);
 	}
+
+       @PostMapping("/createDepartment")
+	public ResponseEntity<Department> createDepartment(@RequestBody DepartmentRequest request) {
+		return new ResponseEntity<>(teacherService.createDepartment(request), HttpStatus.OK);
+	}
 	
 
 }
